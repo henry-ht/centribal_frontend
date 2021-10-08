@@ -1,0 +1,40 @@
+<h1 class="h2" >
+  Heroes
+</h1>
+<hr>
+<section class="row mt-5">
+  <div class="col-md-4 mb-3">
+    <input class="form-control" type="search" [(ngModel)]="textSearch" placeholder="filter by name"  aria-label="Search">
+  </div>
+  <div class="col-md-4 mb-3">
+    <select class="form-control" type="search" [(ngModel)]="flyHero">
+      <option value="all">All</option>
+      <option value="canFly">Can fly</option>
+      <option value="cantFly">Can't fly</option>
+    </select>
+  </div>
+</section>
+<section class="row">
+  <div class="col-md-3 mb-3" *ngFor="let item of heroes | search:'name':textSearch | paginate: { itemsPerPage: total, currentPage: page, totalItems: heroes.length}; let i = index">
+    <div class="card border-0 shadow-sm" >
+      <img [src]=item.avatar appImgFallback class="card-img-top" [alt]="item.name" >
+      <div class="card-body">
+        <h5 class="card-title text-capitalize">
+          {{item.name}} <fa-icon [icon]="faPaperPlane" *ngIf="item.can_fly" class="ml-1 text-info float-right"></fa-icon>
+        </h5>
+        <p class="card-text">
+          {{(item.description | slice:0:27)+(item.description.length >= 27 ? '...':'')}}
+        </p>
+        <div class="text-center">
+          <a class="btn btn-lingth" [routerLink]="['/hero', item.id]" >
+            View more <fa-icon [icon]="faArrowRight" class="ml-1"></fa-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="w-100 w-md-50 ml-auto text-right">
+  <pagination-controls (pageChange)="pageChange($event)"></pagination-controls>
+</div>

@@ -1,0 +1,9 @@
+<h1 class="h2 mb-5" >
+  {{hero?.name}}  <fa-icon [icon]="faPaperPlane" *ngIf="hero?.can_fly" class="ml-1 text-info float-right"></fa-icon>
+</h1>
+<article class="d-flex mb-3">
+  <img [src]=hero?.avatar [alt]=hero?.name class="img-portada m-2">
+  <p>
+    {{hero?.description}}
+  </p>
+</article>
